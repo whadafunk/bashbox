@@ -141,13 +141,14 @@ fi
 ### MISC COMPARISON OPERATORS ###
 
 # -v var -> returns true if the shell variable is set
-# expr1 -a expr2 -> returns true of both expr1 and expr2 are not null
-# expr1 -o expr2 -> returns true if any of the expressions is not null
+# expr1 -a expr2 -> returns true of both expr1 and expr2 are not null; -a stands for &&
+# expr1 -o expr2 -> returns true if any of the expressions is not null; -o stands for ||
 
 
 ### FILE COMPARISON OPERATORS ###
 
 # -a file -> returns true if file exists. Does the same thing as -e
+# -f file -> returns true if the file exists and its a regular file
 # -b file -> returns true if file is a block device
 # -c file -> returns true if file is a character device
 # -d file -> returns true if file is a directory
@@ -160,10 +161,31 @@ fi
 # file1 -nt file2 -> returns true if file1 is newer than file2
 # file1 -ot file2 -> returns true if file1 is older than file2
 
+### Check out a couple of expressions examples
+
+# test /path/to/file1 -nt /path/to/file2 && echo "yes"
+# test -e /path/to/file1 && echo "yes"
+# test -O /path/to/file1 && echo "yes"
+# test "string1" = "string2" && echo "yes" || echo "no"  -> this would display no
+# test 4 -eq 4 -a "moo" = "moo" && echo "it is a cow" || echo "it is not a cow"
+
+# [ -e file1.txt ] && echo "file1 exists" || echo "file1 does not exist"
+
+[ -x /usr/bin/bash ] && echo $
 
 
 
+# Examples of using braces
 
+echo {1..10}
+echo {1..10..2}
+
+# chopping string from the end and from the beginning
+var="the quick brown fox"
+echo ${var%fox}
+echo ${var#th}
+array="element" "alt_element" "trei"
+echo ${array[1]}
 
 
 
