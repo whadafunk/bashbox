@@ -38,6 +38,35 @@ echo -e "The content of the HOME environemt variable is: $HOME"
 # Here are some of the most common environment variables:
 
 # $0 - the name of the script
+# $1, $2, $3, ..., $100 - the first, second, hundred parameter gave by the user on the command line
+# $* a string with all the parameters typed on the command line
+# $@ an array with all the parameters typed on the command line
+# $? the exit status code of the last command
+# $$ The pid of the script itself
+# $# the number of parameters typed on the command line
+
+# Please run the script with a couple of parameters to see this in play
+
+echo "Our script filename is $0, and it has $# parameters, and its running PID is $$"
+
+# To display the parameters from the command line we use a for construct
+
+for i in $@; do
+	echo $i
+done
+
+# Of course we can also display the parameters as a concatenated string
+
+echo -e "The concatenated string of cli parameters is:\n$*"
+
+# If we check the exit status code now, we will get the status code for the last command, meaning the last echo
+
+echo "The last status command was $?"
+
+# Let's see what happens if generate an error
+
+cp file.inexistent inexistent.file
+echo -e "Last command should have exited with error: $?"
 
 
 
